@@ -17,23 +17,23 @@ This will start the server on http://localhost:3000.
 Configuration
 You can modify the server configuration by editing the config.js. This file contains various settings such as port number, database connection details, API keys, etc.
 
-Project Structure
-The project structure is a clean architecture design organized as follows:
+### Clean Architecture 
+    .
+    ├── app
+    |   ├── src
+    │     ├── config       
+    │     ├── data            
+    │     ├── domain            
+    │     ├── infrastructure      
+    │     ├── presentation          
+    │     └── utils             
+    ├── test.ts   
+    ├── main.ts             
+    └── server.ts             
 
-├── app
-|   ├── src
-│     ├── config       // Handles HTTP requests and responses
-│     ├── data            // Custom error types and handling logic
-│     ├── domain            // Business/domain models
-│     ├── infrastructure      // Data access layer, interacts with databases or external services
-│     ├── presentation          // Business logic layer, implements use cases
-│     └── utils             // Utility functions and shared code
-├── test.ts   
-├── main.ts             // Web server setup and initialization
-└── server.ts             // Router setup and route definitions
+
 
 app: This directory contains the core application logic.
-
 config: Holds configuration files and environment variables. It allows the application's settings to be easily modified without changing the code.
 data: Contains files related to the database, such as migrations (scripts to create or modify database schema) and seed data (predefined data to populate the database for testing or initialization).
 domain: Represents business/domain models that encapsulate the application's core entities and logic.
