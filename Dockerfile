@@ -4,12 +4,18 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 COPY tsconfig.json ./
+
 COPY . .
 
-RUN ls -a
-RUN yarn
+ARG NODE_ENV
+
+RUN if [ "$NODE_ENV" = "development" ]; \
+        then yarn install; \
+        else yarn install --prod; \
+        fi
+
 RUN yarn build
 
-EXPOSE 4000
+EXPOSE 3000
 
-CMD ["node", "lib/main.js"]
+CMD ["yarn", "start"]
