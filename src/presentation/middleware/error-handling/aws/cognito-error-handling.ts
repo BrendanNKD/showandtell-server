@@ -17,13 +17,9 @@ const cognitoErrorHandler = (
   if (err instanceof UsernameExistsException) {
     return res
       .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
-      .json({ message: err.message });
-  }
-
-  if (err instanceof NotAuthorizedException) {
-    res
-      .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
-      .json({ message: err.message });
+      .json({
+        message: err.message,
+      });
   }
 
   if (err instanceof CodeMismatchException) {

@@ -3,7 +3,7 @@ import config from "../../config/config";
 import { combinedPath, errorPath, infoPath } from "./path";
 
 export const errorlevel =
-  config.environment === "dev"
+  process.env.NODE_ENV === "developement"
     ? [new transports.Console({ level: "debug" })]
     : [
         new transports.File({ filename: errorPath, level: "error" }),
@@ -11,7 +11,7 @@ export const errorlevel =
       ];
 
 export const infolevel =
-  config.environment === "dev"
+  process.env.NODE_ENV === "developement"
     ? [new transports.Console({ level: "debug" })]
     : [
         new transports.File({ filename: infoPath, level: "info" }),

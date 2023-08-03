@@ -3,6 +3,7 @@ import { GetUserCommand } from "@aws-sdk/client-cognito-identity-provider";
 import cognitoClient from "../../../infrastructure/provider/aws/cognito";
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 import config from "../../../config/config";
+import { infoLogger } from "../../../utils/winston-logger";
 
 export const jwtVerifier = CognitoJwtVerifier.create({
   userPoolId: String(config.aws.cognito.userPoolId), // mandatory
@@ -37,6 +38,8 @@ export const authMiddleware = async (
 
       // has username
       const userInfo = jwtVerifier.verifySync(String(accessToken));
+      console.log(userInfo);
+      infoLogger.error(userInfo);
       req.userInfo = userInfo;
       next();
     } catch {
