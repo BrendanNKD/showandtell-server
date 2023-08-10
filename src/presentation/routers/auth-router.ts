@@ -2,7 +2,6 @@ import express, { Request, Response, NextFunction } from "express";
 import { AuthUserUseCase } from "../../domain/interfaces/use-case/auth";
 import setAuthCookies from "../../utils/cookie/setAuthCookie";
 import captchaMiddleware from "../middleware/captcha/captcha";
-import cognitoError from "../middleware/error-handling/aws/cognito-error-handling";
 
 export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
   const router = express.Router();
@@ -123,7 +122,7 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
 
   router.post(
     "/login",
-    captchaMiddleware,
+    //captchaMiddleware,
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { username, password } = req.body;

@@ -5,6 +5,11 @@ services:
       context: .
       args:
         NODE_ENV: production
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env
+    container_name: showandtell_nodeserver_prod
     environment:
       - NODE_ENV=production
-    command: yarn start
+    command: yarn start:prod

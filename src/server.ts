@@ -16,7 +16,12 @@ const server = express();
 
 const cookieParser = require("cookie-parser");
 
-server.use(cors());
+server.use(
+  cors({
+    origin: "http://localhost:3001",
+    credentials: true, // Update with the actual frontend origin
+  })
+);
 
 server.use(cookieParser());
 
