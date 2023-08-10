@@ -19,28 +19,29 @@ const cognitoErrorHandler = (
       .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
       .json({
         message: err.message,
+        err: err.name,
       });
   }
 
   if (err instanceof CodeMismatchException) {
     res
       .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
-      .json({ message: err.message });
+      .json({ message: err.message, err: err.name });
   }
   if (err instanceof UserNotFoundException) {
     res
       .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
-      .json({ message: err.message });
+      .json({ message: err.message, err: err.name });
   }
   if (err instanceof ExpiredCodeException) {
     res
       .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
-      .json({ message: err.message });
+      .json({ message: err.message, err: err.name });
   }
   if (err instanceof UserNotConfirmedException) {
     res
       .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
-      .json({ message: err.message });
+      .json({ message: err.message, err: err.name });
   }
 };
 
