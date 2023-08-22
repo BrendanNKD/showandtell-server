@@ -13,13 +13,12 @@ import { TUserRegistration } from "../../../domain/entities/auth";
 import cognitoClient from "../../../infrastructure/provider/aws/cognito";
 
 export const signUp = async (user: TUserRegistration) => {
-  const { username, email, password } = user;
-
+  const { username, profiles, password } = user;
   const command = new SignUpCommand({
     ClientId: config.aws.cognito.clientId,
     Username: username,
     Password: password,
-    UserAttributes: [{ Name: "email", Value: email }],
+    UserAttributes: [{ Name: "email", Value: profiles[0].email }],
   });
 
   return cognitoClient.send(command);

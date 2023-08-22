@@ -11,7 +11,8 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
     authMiddleware,
     async (req: Request, res: Response) => {
       try {
-        const { username } = req.userInfo.username;
+        const { username } = req.userInfo;
+
         const profile = await profileUseCase.executeGetOneProfile(username);
 
         if (profile == null) {

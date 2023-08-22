@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
+import { profileSchema } from "./profiles";
 
-const userSchema = new Schema(
+const accountSchema = new Schema(
   {
     username: {
       type: String,
@@ -8,27 +9,11 @@ const userSchema = new Schema(
       index: true,
       unique: true,
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-
-    firstName: {
-      type: String,
-      required: true,
-    },
-
-    lastName: {
-      type: String,
-      required: true,
-    },
-
-    dateOfBirth: { type: String, required: true },
+    profiles: [profileSchema],
   },
   { timestamps: true }
 );
 
-const UserModel = model("User", userSchema);
+const UserModel = model("User", accountSchema);
 
 export default UserModel;

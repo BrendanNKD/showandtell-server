@@ -1,9 +1,6 @@
 export interface CreateProfileRequestModel {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  email: string;
   username: string;
+  profiles: ProfileResponseModel[];
 }
 
 export interface ProfileResponseModel {
@@ -11,5 +8,9 @@ export interface ProfileResponseModel {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
+}
+
+export interface AccountResponseModel {
   username: string;
+  profiles: ProfileResponseModel[];
 }
