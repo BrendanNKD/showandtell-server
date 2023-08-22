@@ -2,6 +2,8 @@ import express, { Request, Response, NextFunction } from "express";
 import { AuthUserUseCase } from "../../domain/interfaces/use-case/auth";
 import setAuthCookies from "../../utils/cookie/setAuthCookie";
 import captchaMiddleware from "../middleware/captcha/captcha";
+import { authMiddleware } from "../middleware/auth/auth";
+import clearAuthCookie from "../../utils/cookie/clearAuthCookie";
 
 export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
   const router = express.Router();
@@ -10,15 +12,11 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
     "/register",
     async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const { password, email, dateOfBirth, firstName, lastName, username } =
-          req.body;
+        const { password, username, profiles } = req.body;
 
         const result = await authUserUseCase.executeCreateUser({
-          email,
+          profiles,
           password,
-          dateOfBirth,
-          firstName,
-          lastName,
           username,
         });
 
@@ -143,6 +141,19 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
         res.status(200).json(true);
       } catch (err: any) {
         next(err);
+      }
+    }
+  );
+
+  router.post(
+    "/logout",
+    authMiddleware,
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        clearAuthCookie(res);
+        res.status(200).json(true);
+      } catch (err: any) {
+        res.status(500).json({ error: "An error occurred" });
       }
     }
   );

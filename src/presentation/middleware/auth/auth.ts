@@ -32,15 +32,13 @@ export const authMiddleware = async (
       const command = new GetUserCommand(input);
 
       const cognitoUser = await cognitoClient.send(command);
-      console.log(cognitoUser);
 
       req.cognitoUser = cognitoUser;
 
       // has username
-      const userInfo = jwtVerifier.verifySync(String(accessToken));
-      console.log(userInfo);
-      infoLogger.error(userInfo);
+      const userInfo = await jwtVerifier.verifySync(String(accessToken));
       req.userInfo = userInfo;
+
       next();
     } catch {
       // you are forbidden to access the service or your token is not verified

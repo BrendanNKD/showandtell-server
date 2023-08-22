@@ -1,12 +1,13 @@
 import {
+  AccountResponseModel,
   CreateProfileRequestModel,
   ProfileResponseModel,
 } from "../../../entities/profile";
 
 export interface ProfileRepository {
-  getOneProfile(username: string): Promise<ProfileResponseModel | null>;
+  getOneProfile(username: string): Promise<AccountResponseModel | null>;
   createOneProfile(
     profile: CreateProfileRequestModel
-  ): Promise<ProfileResponseModel>;
-  getAllProfile(): Promise<ProfileResponseModel[]>;
+  ): Promise<AccountResponseModel>;
+  getAllProfile(): Promise<AccountResponseModel[]>;
 }

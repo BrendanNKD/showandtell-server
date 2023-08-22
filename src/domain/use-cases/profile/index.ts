@@ -1,7 +1,10 @@
 import { TUserRegistration } from "../../entities/auth";
 import { ProfileRepository } from "../../interfaces/repositories/profile";
 import { ProfileUseCase } from "../../interfaces/use-case/profile";
-import { ProfileResponseModel } from "../../entities/profile";
+import {
+  AccountResponseModel,
+  ProfileResponseModel,
+} from "../../entities/profile";
 
 class ProfileExecute implements ProfileUseCase {
   profileRepository: ProfileRepository;
@@ -11,19 +14,19 @@ class ProfileExecute implements ProfileUseCase {
 
   async executeCreateOneProfile(
     profile: TUserRegistration
-  ): Promise<ProfileResponseModel> {
+  ): Promise<AccountResponseModel> {
     const result = await this.profileRepository.createOneProfile(profile);
     return result;
   }
 
   async executeGetOneProfile(
     username: string
-  ): Promise<ProfileResponseModel | null> {
+  ): Promise<AccountResponseModel | null> {
     const result = await this.profileRepository.getOneProfile(username);
     return result;
   }
 
-  async executeGetAllProfile(): Promise<ProfileResponseModel[]> {
+  async executeGetAllProfile(): Promise<AccountResponseModel[]> {
     const result = await this.profileRepository.getAllProfile();
     return result;
   }
