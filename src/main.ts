@@ -11,6 +11,10 @@ import ProfileRouter from "./presentation/routers/profile-router";
 import ProfileExecute from "./domain/use-cases/profile";
 import cognitoErrorHandler from "./presentation/middleware/error-handling/aws/cognito-error-handling";
 import errorLogger from "./presentation/middleware/error-handling/logger";
+import GenerateRouter from "./presentation/routers/generate-router";
+import GenerateUseCaseImp from "./domain/use-cases/generate";
+import OpenAiRouter from "./presentation/routers/openAi-router";
+import CompletionCaseImp from "./domain/use-cases/openAi";
 
 (async () => {
   await getMongodbClient();
@@ -27,6 +31,10 @@ import errorLogger from "./presentation/middleware/error-handling/logger";
 
   const profileRouter = ProfileRouter(new ProfileExecute(profileRepository));
 
+  const generateRouter = GenerateRouter(new GenerateUseCaseImp());
+
+  const chatRouter = OpenAiRouter(new CompletionCaseImp());
+
   // Base route
   server.use("/api", apiRouter);
 
@@ -37,6 +45,8 @@ import errorLogger from "./presentation/middleware/error-handling/logger";
   v1Router.use("/", HealthRouter());
   v1Router.use("/auth", authRouter);
   v1Router.use("/profile", profileRouter);
+  v1Router.use("/generate", generateRouter);
+  v1Router.use("/openai", chatRouter);
 
   // error logger
   v1Router.use(errorLogger);

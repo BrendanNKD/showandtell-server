@@ -18,6 +18,10 @@ const {
   LOG_INFO_FILE,
   LOG_ERROR_FILE,
   LOG_ALL_FILE,
+  REPLICATE_API_TOKEN,
+  ORGANIZATION_KEY,
+  OPENAI_API_KEY,
+  APIURl,
 } = process.env;
 
 const config = {
@@ -44,6 +48,14 @@ const config = {
     errorFileName: LOG_ERROR_FILE,
     infoFileName: LOG_INFO_FILE,
     combinedFileName: LOG_ALL_FILE,
+  },
+  replicate: {
+    token: REPLICATE_API_TOKEN,
+  },
+  openai: {
+    organization: ORGANIZATION_KEY,
+    apiKey: OPENAI_API_KEY,
+    url: APIURl,
   },
 };
 

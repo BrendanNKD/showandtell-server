@@ -18,19 +18,15 @@ const cookieParser = require("cookie-parser");
 
 server.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
 
 server.use(cookieParser());
+server.use(bodyParser.json({ limit: "50mb" }));
+server.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 server.use(express.json());
-
-server.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
 
 export default server;
