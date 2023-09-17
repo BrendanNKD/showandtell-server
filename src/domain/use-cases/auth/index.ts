@@ -11,12 +11,18 @@ import {
   login,
 } from "../../../utils/aws/cognito/cognito-commands";
 import setAuthCookies from "../../../utils/cookie/setAuthCookie";
+import { CollectionRepository } from "../../interfaces/repositories/collection";
 
 class AuthUserUseCaseImp implements AuthUserUseCase {
   profileRepository: ProfileRepository;
+  collectionRepository: CollectionRepository;
 
-  constructor(profileRepository: ProfileRepository) {
+  constructor(
+    profileRepository: ProfileRepository,
+    collectionRepository: CollectionRepository
+  ) {
     this.profileRepository = profileRepository;
+    this.collectionRepository = collectionRepository;
   }
 
   async executeCreateUser(user: TUserRegistration): Promise<boolean> {
@@ -30,6 +36,12 @@ class AuthUserUseCaseImp implements AuthUserUseCase {
       profiles,
       username,
     });
+
+    const createCollection =
+      await this.collectionRepository.createOneCollection({
+        username: username,
+        collection: [],
+      });
 
     if (createdProfile) return true;
     return false;

@@ -8,7 +8,7 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "standard-with-typescript",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
   "overrides": [],
   "parserOptions": {

@@ -22,6 +22,9 @@ const {
   ORGANIZATION_KEY,
   OPENAI_API_KEY,
   APIURl,
+  CLOUD_NAME,
+  API_KEY,
+  API_SECRET,
 } = process.env;
 
 const config = {
@@ -56,6 +59,11 @@ const config = {
     organization: ORGANIZATION_KEY,
     apiKey: OPENAI_API_KEY,
     url: APIURl,
+  },
+  cloudinary: {
+    cloud_name: CLOUD_NAME,
+    api_key: API_KEY,
+    secret: API_SECRET,
   },
 };
 

@@ -158,5 +158,17 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
     }
   );
 
+  router.post(
+    "/session",
+    authMiddleware,
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        res.status(200).json(true);
+      } catch (err: any) {
+        res.status(500).json({ error: "An error occurred" });
+      }
+    }
+  );
+
   return router;
 }

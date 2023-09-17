@@ -17,32 +17,35 @@ export const authMiddleware = async (
   next: NextFunction
 ) => {
   const accessToken = req.cookies.access_token || "";
-  // const idToken = req.cookies.id_token || "";
-  // const refreshToken = req.cookies.refresh_token || "";
+  const idToken = req.cookies.id_token || "";
+  const refreshToken = req.cookies.refresh_token || "";
 
-  if (accessToken === "") {
+  if (accessToken === "" && idToken === "" && refreshToken === "") {
     res.status(401).json({ success: false, error: "Not Authenticated" });
-  } else {
-    try {
-      const input = {
-        // GetUserRequest
-        AccessToken: accessToken, // required
-      };
+  }
+  if (accessToken === "" && idToken === "" && refreshToken) {
+    res.status(440).send({ success: false, error: "Session expired" });
+  }
 
-      const command = new GetUserCommand(input);
+  try {
+    const input = {
+      // GetUserRequest
+      AccessToken: accessToken, // required
+    };
 
-      const cognitoUser = await cognitoClient.send(command);
+    const command = new GetUserCommand(input);
 
-      req.cognitoUser = cognitoUser;
+    const cognitoUser = await cognitoClient.send(command);
 
-      // has username
-      const userInfo = await jwtVerifier.verifySync(String(accessToken));
-      req.userInfo = userInfo;
+    req.cognitoUser = cognitoUser;
 
-      next();
-    } catch {
-      // you are forbidden to access the service or your token is not verified
-      res.status(404).json({ statusCode: 404, message: "Forbidden" });
-    }
+    // has username
+    const userInfo = await jwtVerifier.verifySync(String(accessToken));
+    req.userInfo = userInfo;
+
+    next();
+  } catch {
+    // you are forbidden to access the service or your token is not verified
+    res.status(404).json({ statusCode: 404, message: "Forbidden" });
   }
 };
