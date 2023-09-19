@@ -38,11 +38,28 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
     }
   });
 
-  router.put("/", async (req: Request, res: Response) => {
-    try {
-      const profile = await profileUseCase.executeGetAllProfile();
+  // router.put("/", async (req: Request, res: Response) => {
+  //   try {
+  //     const profile = await profileUseCase.executeGetAllProfile();
 
-      res.status(200).json(profile);
+  //     res.status(200).json(profile);
+  //   } catch (err) {
+  //     console.error(err);
+  //     res.status(500).json({ message: "Error getting profile" });
+  //   }
+  // });
+
+  router.post("/add", authMiddleware, async (req: Request, res: Response) => {
+    try {
+      const { username } = req.userInfo;
+      const { profile } = req.body;
+
+      const account = await profileUseCase.executeAddOneProfile({
+        username: username,
+        profile: profile,
+      });
+
+      res.status(200).json(account);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Error getting profile" });

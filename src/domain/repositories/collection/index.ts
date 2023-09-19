@@ -13,10 +13,11 @@ import { ProfileRepository } from "../../interfaces/repositories/profile";
 class CollectionRepositoryImpl implements CollectionRepository {
   async getAllCollection(username: string): Promise<any> {
     const collections = await CollectionModel.findOne({ username }).select(
-      "collection"
+      "collections"
     );
     return collections;
   }
+
   async insertOneCollection(
     newCollection: UpdateCollectionRequestModel
   ): Promise<any> {
@@ -33,14 +34,5 @@ class CollectionRepositoryImpl implements CollectionRepository {
     const result = await new CollectionModel(collection).save();
     return result;
   }
-
-  //   async getOneProfile(username: string): Promise<AccountResponseModel | null> {
-  //     const result = await UserModel.findOne({ username }).lean();
-  //     return result;
-  //   }
-  //   async getAllProfile(): Promise<AccountResponseModel[]> {
-  //     const result = await UserModel.find({}).lean();
-  //     return result;
-  //   }
 }
 export default CollectionRepositoryImpl;

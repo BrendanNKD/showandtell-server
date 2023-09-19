@@ -1,6 +1,7 @@
 import { TUserRegistration } from "../../../entities/auth";
 import {
   AccountResponseModel,
+  ProfileRequestModel,
   ProfileResponseModel,
 } from "../../../entities/profile";
 
@@ -10,4 +11,5 @@ export interface ProfileUseCase {
   ): Promise<AccountResponseModel | null>;
   executeGetOneProfile(username: string): Promise<AccountResponseModel | null>;
   executeGetAllProfile(): Promise<AccountResponseModel[]>;
+  executeAddOneProfile(profile: ProfileRequestModel): Promise<any>;
 }

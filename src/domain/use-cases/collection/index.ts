@@ -23,13 +23,14 @@ class CollectionUseCaseImp implements CollectionUseCase {
     // Upload an image to Cloudinary
 
     try {
+      console.log(data);
       // Upload an image to Cloudinary
-      const result = await cloudinary.uploader.upload(data.collections.image, {
-        folder: "showandtell",
-        resource_type: "image",
-      });
+      // const result = await cloudinary.uploader.upload(data.collections.image, {
+      //   folder: "showandtell",
+      //   resource_type: "image",
+      // });
 
-      data.collections.image = String(result.url);
+      // data.collections.image = String(result.url);
 
       const createCollection =
         await this.collectionRepository.insertOneCollection({
@@ -43,6 +44,11 @@ class CollectionUseCaseImp implements CollectionUseCase {
       console.error(error);
       throw error;
     }
+  }
+
+  async executeGetCollection(username: string): Promise<any> {
+    const result = await this.collectionRepository.getAllCollection(username);
+    return result;
   }
 }
 

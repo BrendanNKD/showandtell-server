@@ -3,6 +3,7 @@ import { ProfileRepository } from "../../interfaces/repositories/profile";
 import { ProfileUseCase } from "../../interfaces/use-case/profile";
 import {
   AccountResponseModel,
+  ProfileRequestModel,
   ProfileResponseModel,
 } from "../../entities/profile";
 
@@ -28,6 +29,11 @@ class ProfileExecute implements ProfileUseCase {
 
   async executeGetAllProfile(): Promise<AccountResponseModel[]> {
     const result = await this.profileRepository.getAllProfile();
+    return result;
+  }
+
+  async executeAddOneProfile(profile: ProfileRequestModel): Promise<any> {
+    const result = await this.profileRepository.addOneProfile(profile);
     return result;
   }
 }

@@ -11,21 +11,35 @@ export default function CollectionRouter(collectionUseCase: CollectionUseCase) {
     authMiddleware,
     async (req: Request, res: Response, next: NextFunction) => {
       const { username } = req.userInfo;
-      try {
-        const { data } = req.body;
+      console.log(req.body);
 
+      try {
         const result = await collectionUseCase.executeSaveCollection({
           username: username,
-          collections: data,
+          collections: req.body,
         });
-        console.log(result);
-        if (result)
-          res.status(200).json({ message: "saved successful", result: result });
+
+        if (result) res.status(200).json(result);
       } catch (err: any) {
         next(err);
       }
     }
   );
 
+  router.get(
+    "/",
+    authMiddleware,
+    async (req: Request, res: Response, next: NextFunction) => {
+      const { username } = req.userInfo;
+      try {
+        console.log(username);
+        const result = await collectionUseCase.executeGetCollection(username);
+
+        if (result) res.status(200).json(result.collections);
+      } catch (err: any) {
+        next(err);
+      }
+    }
+  );
   return router;
 }

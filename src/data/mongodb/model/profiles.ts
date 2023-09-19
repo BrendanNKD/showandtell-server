@@ -3,7 +3,6 @@ import { Schema, model } from "mongoose";
 export const profileSchema = new Schema({
   email: {
     type: String,
-    required: true,
     unique: true,
   },
 
@@ -14,6 +13,11 @@ export const profileSchema = new Schema({
 
   lastName: {
     type: String,
+    required: true,
+  },
+
+  profilePic: {
+    type: Number,
     required: true,
   },
 
