@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const collections = new Schema({
-  image: { type: Buffer, required: true },
+  image: { type: String, required: true },
   caption: { type: String, required: true },
   profile: { type: String, required: true },
   profileIndex: { type: Number, required: true },

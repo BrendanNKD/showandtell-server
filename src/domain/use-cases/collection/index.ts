@@ -23,7 +23,6 @@ class CollectionUseCaseImp implements CollectionUseCase {
     // Upload an image to Cloudinary
 
     try {
-      console.log(data);
       // Upload an image to Cloudinary
       // const result = await cloudinary.uploader.upload(data.collections.image, {
       //   folder: "showandtell",

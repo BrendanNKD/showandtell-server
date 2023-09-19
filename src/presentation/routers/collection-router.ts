@@ -11,12 +11,12 @@ export default function CollectionRouter(collectionUseCase: CollectionUseCase) {
     authMiddleware,
     async (req: Request, res: Response, next: NextFunction) => {
       const { username } = req.userInfo;
-      console.log(req.body);
+      const data = req.body;
 
       try {
         const result = await collectionUseCase.executeSaveCollection({
           username: username,
-          collections: req.body,
+          collections: data,
         });
 
         if (result) res.status(200).json(result);

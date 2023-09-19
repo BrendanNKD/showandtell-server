@@ -43,7 +43,7 @@ class AuthUserUseCaseImp implements AuthUserUseCase {
         collection: [],
       });
 
-    if (createdProfile) return true;
+    if (createdProfile && createCollection) return true;
     return false;
   }
 

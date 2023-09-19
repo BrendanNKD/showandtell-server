@@ -20,9 +20,6 @@ export const authMiddleware = async (
   const idToken = req.cookies.id_token || "";
   const refreshToken = req.cookies.refresh_token || "";
 
-  if (accessToken === "" && idToken === "" && refreshToken === "") {
-    res.status(401).json({ success: false, error: "Not Authenticated" });
-  }
   if (accessToken === "" && idToken === "" && refreshToken) {
     res.status(440).send({ success: false, error: "Session expired" });
   }

@@ -20,6 +20,7 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
           username,
         });
 
+        console.log(result);
         if (result)
           res.status(201).json({ message: "Account Successfully created" });
       } catch (err: any) {
