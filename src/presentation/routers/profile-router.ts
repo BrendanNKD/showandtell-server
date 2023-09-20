@@ -52,11 +52,10 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
   router.post("/add", authMiddleware, async (req: Request, res: Response) => {
     try {
       const { username } = req.userInfo;
-      const { profile } = req.body;
 
       const account = await profileUseCase.executeAddOneProfile({
         username: username,
-        profile: profile,
+        profile: req.body,
       });
 
       res.status(200).json(account);
