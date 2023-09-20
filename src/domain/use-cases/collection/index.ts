@@ -23,13 +23,13 @@ class CollectionUseCaseImp implements CollectionUseCase {
     // Upload an image to Cloudinary
 
     try {
-      // Upload an image to Cloudinary
-      // const result = await cloudinary.uploader.upload(data.collections.image, {
-      //   folder: "showandtell",
-      //   resource_type: "image",
-      // });
+      //Upload an image to Cloudinary
+      const result = await cloudinary.uploader.upload(data.collections.image, {
+        folder: "showandtell",
+        resource_type: "image",
+      });
 
-      // data.collections.image = String(result.url);
+      data.collections.image = String(result.url);
 
       const createCollection =
         await this.collectionRepository.insertOneCollection({
@@ -41,7 +41,7 @@ class CollectionUseCaseImp implements CollectionUseCase {
     } catch (error) {
       // Handle errors appropriately
       console.error(error);
-      throw error;
+      throw error;  
     }
   }
 

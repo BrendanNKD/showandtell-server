@@ -32,7 +32,6 @@ export default function CollectionRouter(collectionUseCase: CollectionUseCase) {
     async (req: Request, res: Response, next: NextFunction) => {
       const { username } = req.userInfo;
       try {
-        console.log(username);
         const result = await collectionUseCase.executeGetCollection(username);
 
         if (result) res.status(200).json(result.collections);

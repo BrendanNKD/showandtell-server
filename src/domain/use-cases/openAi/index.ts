@@ -12,18 +12,18 @@ class CompletionCaseImp implements CompletionUseCase {
 
     //one-shot prompting
     const conditioning =
-      " for kids to learn about what is inside the image. example the image has a tiger. the object in the image is a [object] from.... and this is usually used on ...... OR the object in the image is a shape of a .... usually can be found in .... OR the object in the image is a animal ..... [animal] is a .... and found in .... and has ......";
+      " to a young kid in an informative and fun way, using exclamations, don't use any complex words";
 
-    const prompt = "write about the image caption" + data + conditioning;
+    const prompt = "Explain an object" + data + conditioning;
 
     const response = await openai.completions.create({
-      model: "text-davinci-003",
+      model: "text-davinci-001",
       prompt: prompt,
-      temperature: 1,
-      max_tokens: 256,
+      temperature: 0.4,
+      max_tokens: 250,
       top_p: 1,
       frequency_penalty: 0,
-      presence_penalty: 0,
+      presence_penalty:  0.3,
     });
     return response;
   }

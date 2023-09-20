@@ -21,6 +21,7 @@ export const authMiddleware = async (
   const refreshToken = req.cookies.refresh_token || "";
 
   if (accessToken === "" && idToken === "" && refreshToken) {
+    console.log("expired");
     res.status(440).send({ success: false, error: "Session expired" });
   }
 
@@ -41,7 +42,7 @@ export const authMiddleware = async (
     req.userInfo = userInfo;
 
     next();
-  } catch {
+  } catch (err) {
     // you are forbidden to access the service or your token is not verified
     res.status(404).json({ statusCode: 404, message: "Forbidden" });
   }

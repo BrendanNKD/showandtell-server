@@ -5,6 +5,7 @@ import {
   CodeMismatchException,
   UsernameExistsException,
   NotAuthorizedException,
+  InvalidParameterException,
 } from "@aws-sdk/client-cognito-identity-provider";
 import { NextFunction, Request, Response } from "express";
 
@@ -39,6 +40,11 @@ const cognitoErrorHandler = (
       .json({ message: err.message, err: err.name });
   }
   if (err instanceof UserNotConfirmedException) {
+    res
+      .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
+      .json({ message: err.message, err: err.name });
+  }
+  if (err instanceof InvalidParameterException) {
     res
       .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
       .json({ message: err.message, err: err.name });
