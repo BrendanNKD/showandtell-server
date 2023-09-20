@@ -148,7 +148,6 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
 
   router.post(
     "/logout",
-    authMiddleware,
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         clearAuthCookie(res);
