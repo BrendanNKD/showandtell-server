@@ -12,15 +12,16 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
     "/register",
     async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const { password, username, profiles } = req.body;
-
+        const { password, username, profiles, email } = req.body;
+  
         const result = await authUserUseCase.executeCreateUser({
           profiles,
           password,
+          email,
           username,
         });
 
-        console.log(result);
+
         if (result)
           res.status(201).json({ message: "Account Successfully created" });
       } catch (err: any) {

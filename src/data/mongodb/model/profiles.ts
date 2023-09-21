@@ -1,14 +1,6 @@
 import { Schema, model } from "mongoose";
 
 export const profileSchema = new Schema({
-  email: {
-    type: String,
-    // trim: true,
-    // index: true,
-    // unique: true,
-    // sparse: true,
-  },
-
   firstName: {
     type: String,
     required: true,

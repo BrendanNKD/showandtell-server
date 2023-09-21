@@ -1,10 +1,10 @@
 export interface CreateProfileRequestModel {
   username: string;
+  email: string;
   profiles: ProfileResponseModel[];
 }
 
 export interface ProfileResponseModel {
-  email?: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;

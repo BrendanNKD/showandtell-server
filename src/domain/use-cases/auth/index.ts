@@ -26,14 +26,16 @@ class AuthUserUseCaseImp implements AuthUserUseCase {
   }
 
   async executeCreateUser(user: TUserRegistration): Promise<boolean> {
-    const { username, profiles } = user;
+    const { username, profiles, email } = user;
 
     // will throw error if user exist
     await signUp(user);
 
     // create profile
+
     const createdProfile = await this.profileRepository.createOneProfile({
       profiles,
+      email,
       username,
     });
 

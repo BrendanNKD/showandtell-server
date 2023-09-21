@@ -9,6 +9,10 @@ const accountSchema = new Schema(
       index: true,
       unique: true,
     },
+    email: {
+      type: String,
+      unique: true,
+    },
 
     profiles: [profileSchema],
   },
