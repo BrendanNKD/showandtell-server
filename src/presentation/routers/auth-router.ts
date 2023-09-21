@@ -35,11 +35,12 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
       try {
         const { username, otp } = req.body;
 
+        console.log(req.body);
         const result = await authUserUseCase.executeConfirmSignup(
           username,
           otp
         );
-
+        console.log(result  );
         if (result) res.status(200).json(result);
       } catch (err: any) {
         next(err);
