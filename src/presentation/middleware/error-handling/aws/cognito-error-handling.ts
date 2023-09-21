@@ -15,6 +15,15 @@ const cognitoErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  if (err instanceof NotAuthorizedException) {
+    return res
+      .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)
+      .json({
+        message: err.message,
+        err: err.name,
+      });
+  }
+
   if (err instanceof UsernameExistsException) {
     return res
       .status(err.$metadata.httpStatusCode ? err.$metadata.httpStatusCode : 500)

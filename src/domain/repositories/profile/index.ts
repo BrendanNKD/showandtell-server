@@ -4,6 +4,7 @@ import {
   CreateProfileRequestModel,
   ProfileRequestModel,
   ProfileResponseModel,
+  UpdateProfileRequestModel,
 } from "../../entities/profile";
 import { ProfileRepository } from "../../interfaces/repositories/profile";
 
@@ -32,5 +33,20 @@ class ProfileRepositoryImpl implements ProfileRepository {
     );
     return updatedDocument;
   }
+
+  async updateOneProfile(newprofile: UpdateProfileRequestModel): Promise<any> {
+    const { index, profile, username } = newprofile;
+    const updatedDocument = await UserModel.findOneAndUpdate(
+      { username },
+      {
+        $set: {
+          [`profiles.${index}`]: profile,
+        },
+      },
+      { new: true }
+    );
+    return updatedDocument;
+  }
 }
+
 export default ProfileRepositoryImpl;

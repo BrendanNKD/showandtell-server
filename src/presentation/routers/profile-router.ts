@@ -65,5 +65,27 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
     }
   });
 
+  router.post(
+    "/update",
+    authMiddleware,
+    async (req: Request, res: Response) => {
+      try {
+        const { username } = req.userInfo;
+        const { index, profile } = req.body;
+        console.log(req.body);
+        const account = await profileUseCase.executeUpateOneProfile({
+          username,
+          index,
+          profile,
+        });
+
+        res.status(200).json(account);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error getting profile" });
+      }
+    }
+  );
+
   return router;
 }

@@ -3,6 +3,7 @@ import {
   AccountResponseModel,
   ProfileRequestModel,
   ProfileResponseModel,
+  UpdateProfileRequestModel,
 } from "../../../entities/profile";
 
 export interface ProfileUseCase {
@@ -12,4 +13,5 @@ export interface ProfileUseCase {
   executeGetOneProfile(username: string): Promise<AccountResponseModel | null>;
   executeGetAllProfile(): Promise<AccountResponseModel[]>;
   executeAddOneProfile(profile: ProfileRequestModel): Promise<any>;
+  executeUpateOneProfile(profile: UpdateProfileRequestModel): Promise<any>;
 }

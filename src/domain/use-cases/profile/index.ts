@@ -5,6 +5,7 @@ import {
   AccountResponseModel,
   ProfileRequestModel,
   ProfileResponseModel,
+  UpdateProfileRequestModel,
 } from "../../entities/profile";
 
 class ProfileExecute implements ProfileUseCase {
@@ -34,6 +35,13 @@ class ProfileExecute implements ProfileUseCase {
 
   async executeAddOneProfile(profile: ProfileRequestModel): Promise<any> {
     const result = await this.profileRepository.addOneProfile(profile);
+    return result;
+  }
+
+  async executeUpateOneProfile(
+    profile: UpdateProfileRequestModel
+  ): Promise<any> {
+    const result = await this.profileRepository.updateOneProfile(profile);
     return result;
   }
 }

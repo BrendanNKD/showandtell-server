@@ -20,3 +20,9 @@ export interface ProfileRequestModel {
   username: string;
   profile: ProfileResponseModel;
 }
+
+export interface UpdateProfileRequestModel {
+  username: string;
+  index: number;
+  profile: ProfileResponseModel;
+}
