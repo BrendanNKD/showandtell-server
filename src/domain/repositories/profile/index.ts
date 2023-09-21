@@ -26,6 +26,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
   async addOneProfile(newprofile: ProfileRequestModel): Promise<any> {
     const { username, profile } = newprofile;
+    console.log(profile);
     const updatedDocument = await UserModel.findOneAndUpdate(
       { username },
       { $push: { profiles: profile } },

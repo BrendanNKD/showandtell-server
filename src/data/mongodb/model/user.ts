@@ -9,6 +9,7 @@ const accountSchema = new Schema(
       index: true,
       unique: true,
     },
+
     profiles: [profileSchema],
   },
   { timestamps: true }

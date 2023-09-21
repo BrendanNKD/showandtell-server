@@ -35,12 +35,11 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
       try {
         const { username, otp } = req.body;
 
-        console.log(req.body);
         const result = await authUserUseCase.executeConfirmSignup(
           username,
           otp
         );
-        console.log(result  );
+
         if (result) res.status(200).json(result);
       } catch (err: any) {
         next(err);
@@ -149,6 +148,7 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
 
   router.post(
     "/logout",
+    authMiddleware,
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         clearAuthCookie(res);

@@ -90,3 +90,7 @@ export const login = async (username: string, password: string) => {
 
   return cognitoClient.send(command);
 };
+
+// export const logout = async (accessToken: string) => {
+//   return cognitoClient.send(command);
+// };

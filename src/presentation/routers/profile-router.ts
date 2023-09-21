@@ -12,7 +12,7 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
     async (req: Request, res: Response) => {
       try {
         const { username } = req.userInfo;
-
+        console.log(username);
         const profile = await profileUseCase.executeGetOneProfile(username);
 
         if (profile == null) {

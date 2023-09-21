@@ -3,7 +3,10 @@ import { Schema, model } from "mongoose";
 export const profileSchema = new Schema({
   email: {
     type: String,
-    unique: true,
+    // trim: true,
+    // index: true,
+    // unique: true,
+    // sparse: true,
   },
 
   firstName: {
