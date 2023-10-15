@@ -20,11 +20,11 @@ export const authMiddleware = async (
   const idToken = req.cookies.id_token || "";
   const refreshToken = req.cookies.refresh_token || "";
 
-  if (accessToken === "" && idToken === "" && refreshToken) {
-    console.log("expired");
-    res.status(440).send({ success: false, error: "Session expired" });
-  }
-
+  // if (accessToken === "" && idToken === "" && refreshToken) {
+  //   console.log("expired");
+  //   // res.status(440).send({ success: false, error: "Session expired" });
+  //   next();
+  // } else
   try {
     const input = {
       // GetUserRequest

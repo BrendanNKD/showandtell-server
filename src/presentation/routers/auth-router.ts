@@ -13,14 +13,13 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { password, username, profiles, email } = req.body;
-  
+
         const result = await authUserUseCase.executeCreateUser({
           profiles,
           password,
           email,
           username,
         });
-
 
         if (result)
           res.status(201).json({ message: "Account Successfully created" });
