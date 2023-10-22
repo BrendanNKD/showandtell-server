@@ -87,5 +87,16 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
     }
   );
 
+  router.get("/levelrules", async (req: Request, res: Response) => {
+    try {
+      const rules = await profileUseCase.executeGetLevelRules();
+
+      res.status(200).json(rules);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error getting rules" });
+    }
+  });
+
   return router;
 }

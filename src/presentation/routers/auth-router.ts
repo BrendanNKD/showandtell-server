@@ -52,11 +52,9 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { username } = req.body;
-
         const result = await authUserUseCase.executeResendConfirmationCode(
           username
         );
-
         res.status(200).json(result);
       } catch (err: any) {
         next(err);
@@ -69,9 +67,7 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { username } = req.body;
-
         const result = await authUserUseCase.executeResetPassword(username);
-
         if (result) res.status(200).json(result);
       } catch (err: any) {
         next(err);
@@ -84,7 +80,6 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { password, otp, username } = req.body;
-
         const result = await authUserUseCase.executeConfirmResetPassword(
           username,
           password,
@@ -103,15 +98,12 @@ export default function AuthRouter(authUserUseCase: AuthUserUseCase) {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { previousPassword, proposedPassword } = req.body;
-
         const accessToken = req.cookies.access_token;
-
         const result = await authUserUseCase.executeChangePassword(
           accessToken,
           previousPassword,
           proposedPassword
         );
-
         res.status(200).json(result);
       } catch (err: any) {
         next(err);

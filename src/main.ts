@@ -18,6 +18,9 @@ import CompletionCaseImp from "./domain/use-cases/openAi";
 import CollectionRepositoryImpl from "./domain/repositories/collection";
 import CollectionRouter from "./presentation/routers/collection-router";
 import CollectionUseCaseImp from "./domain/use-cases/collection";
+import QuestRouter from "./presentation/routers/quest-router";
+import QuestRepositoryImpl from "./domain/repositories/quest";
+import QuestCaseImp from "./domain/use-cases/quest";
 
 (async () => {
   await getMongodbClient();
@@ -29,10 +32,14 @@ import CollectionUseCaseImp from "./domain/use-cases/collection";
   // Repositories
   const profileRepository = new ProfileRepositoryImpl();
   const collectionRepository = new CollectionRepositoryImpl();
-
+  const questRepository = new QuestRepositoryImpl();
   // Create route
   const authRouter = AuthRouter(
-    new AuthUserUseCaseImp(profileRepository, collectionRepository)
+    new AuthUserUseCaseImp(
+      profileRepository,
+      collectionRepository,
+      questRepository
+    )
   );
 
   const profileRouter = ProfileRouter(new ProfileExecute(profileRepository));
@@ -44,6 +51,8 @@ import CollectionUseCaseImp from "./domain/use-cases/collection";
   const generateRouter = GenerateRouter(new GenerateUseCaseImp());
 
   const chatRouter = OpenAiRouter(new CompletionCaseImp());
+
+  const questRouter = QuestRouter(new QuestCaseImp(questRepository));
 
   // Base route
   server.use("/api", apiRouter);
@@ -58,6 +67,7 @@ import CollectionUseCaseImp from "./domain/use-cases/collection";
   v1Router.use("/generate", generateRouter);
   v1Router.use("/openai", chatRouter);
   v1Router.use("/collection", collectionRouter);
+  v1Router.use("/quest", questRouter);
 
   // error logger
   v1Router.use(errorLogger);

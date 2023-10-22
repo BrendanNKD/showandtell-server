@@ -1,3 +1,4 @@
+import levelRules from "../../../data/mongodb/model/levelRules";
 import UserModel from "../../../data/mongodb/model/user";
 import {
   AccountResponseModel,
@@ -13,6 +14,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     profile: CreateProfileRequestModel
   ): Promise<AccountResponseModel> {
     const result = await new UserModel(profile).save();
+
     return result;
   }
 
@@ -26,7 +28,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
   async addOneProfile(newprofile: ProfileRequestModel): Promise<any> {
     const { username, profile } = newprofile;
-    console.log(profile);
+
     const updatedDocument = await UserModel.findOneAndUpdate(
       { username },
       { $push: { profiles: profile } },
@@ -47,6 +49,10 @@ class ProfileRepositoryImpl implements ProfileRepository {
       { new: true }
     );
     return updatedDocument;
+  }
+  async getLevelRules(): Promise<any> {
+    const result = await levelRules.find({}).lean();
+    return result;
   }
 }
 

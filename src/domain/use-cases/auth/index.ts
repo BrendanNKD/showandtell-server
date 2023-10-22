@@ -12,17 +12,22 @@ import {
 } from "../../../utils/aws/cognito/cognito-commands";
 import setAuthCookies from "../../../utils/cookie/setAuthCookie";
 import { CollectionRepository } from "../../interfaces/repositories/collection";
+import { QuestRepository } from "../../interfaces/repositories/quest";
+import { createQuest } from "../../../utils/quests";
 
 class AuthUserUseCaseImp implements AuthUserUseCase {
   profileRepository: ProfileRepository;
   collectionRepository: CollectionRepository;
+  questRepository: QuestRepository;
 
   constructor(
     profileRepository: ProfileRepository,
-    collectionRepository: CollectionRepository
+    collectionRepository: CollectionRepository,
+    questRepository: QuestRepository
   ) {
     this.profileRepository = profileRepository;
     this.collectionRepository = collectionRepository;
+    this.questRepository = questRepository;
   }
 
   async executeCreateUser(user: TUserRegistration): Promise<boolean> {
@@ -33,7 +38,7 @@ class AuthUserUseCaseImp implements AuthUserUseCase {
 
     // create profile
 
-    const createdProfile = await this.profileRepository.createOneProfile({
+    const createdProfile: any = await this.profileRepository.createOneProfile({
       profiles,
       email,
       username,
@@ -45,7 +50,22 @@ class AuthUserUseCaseImp implements AuthUserUseCase {
         collection: [],
       });
 
-    if (createdProfile && createCollection) return true;
+    const newQuests = await createQuest();
+
+    const identity = {
+      id: {
+        username: username,
+        profileId: String(createdProfile.profiles[0]._id),
+      },
+      newQuests: newQuests,
+      newProfile: true,
+    };
+
+    const createdQuest = await this.questRepository.createProfileQuests(
+      identity
+    );
+
+    if (createdProfile && createCollection && createdQuest) return true;
     return false;
   }
 

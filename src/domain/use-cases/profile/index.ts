@@ -7,7 +7,8 @@ import {
   ProfileResponseModel,
   UpdateProfileRequestModel,
 } from "../../entities/profile";
-
+import { readFile } from "fs/promises";
+import { join, dirname } from "path";
 class ProfileExecute implements ProfileUseCase {
   profileRepository: ProfileRepository;
   constructor(profileRepository: ProfileRepository) {
@@ -44,6 +45,12 @@ class ProfileExecute implements ProfileUseCase {
     const result = await this.profileRepository.updateOneProfile(profile);
     return result;
   }
+
+  async executeGetLevelRules(): Promise<any> {
+    const result = await this.profileRepository.getLevelRules();
+    return result;
+  }
+
 }
 
 export default ProfileExecute;

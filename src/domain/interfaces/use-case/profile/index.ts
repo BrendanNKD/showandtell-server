@@ -14,4 +14,6 @@ export interface ProfileUseCase {
   executeGetAllProfile(): Promise<AccountResponseModel[]>;
   executeAddOneProfile(profile: ProfileRequestModel): Promise<any>;
   executeUpateOneProfile(profile: UpdateProfileRequestModel): Promise<any>;
+  executeGetLevelRules(): Promise<any>;
+
 }
