@@ -2,12 +2,14 @@ import { GenerateUseCase } from "../../interfaces/use-case/generate";
 import { replicate } from "../../../utils/replicate";
 
 class GenerateUseCaseImp implements GenerateUseCase {
-  async executeGenerateCaption(image: string): Promise<any> {
+  async executeGenerateCaption(data: any): Promise<any> {
+    const { image, category } = data;
     const output = await replicate.run(
-      "salesforce/blip:2e1dddc8621f72155f24cf2e0adbde548458d3cab9f00c0139eea840d0ac4746",
+      "dummybanana/clip_gpt2:c1eb5c955f92dfdc78aa138a46a4cb544dc321ead2f4aaa4fce06dcf59f24174",
       {
         input: {
           image: image,
+          model: category,
         },
       }
     );

@@ -9,16 +9,24 @@ import {
 } from "../../entities/profile";
 import { readFile } from "fs/promises";
 import { join, dirname } from "path";
+import { QuestRepository } from "../../interfaces/repositories/quest";
+import { createQuest } from "../../../utils/quests";
 class ProfileExecute implements ProfileUseCase {
   profileRepository: ProfileRepository;
-  constructor(profileRepository: ProfileRepository) {
+  questRepository: QuestRepository;
+  constructor(
+    profileRepository: ProfileRepository,
+    questRepository: QuestRepository
+  ) {
     this.profileRepository = profileRepository;
+    this.questRepository = questRepository;
   }
 
   async executeCreateOneProfile(
     profile: TUserRegistration
   ): Promise<AccountResponseModel> {
-    const result = await this.profileRepository.createOneProfile(profile);
+    const result: any = await this.profileRepository.createOneProfile(profile);
+
     return result;
   }
 
@@ -34,8 +42,19 @@ class ProfileExecute implements ProfileUseCase {
     return result;
   }
 
-  async executeAddOneProfile(profile: ProfileRequestModel): Promise<any> {
-    const result = await this.profileRepository.addOneProfile(profile);
+  async executeAddOneProfile(
+    profiledetails: ProfileRequestModel
+  ): Promise<any> {
+    const { username } = profiledetails;
+    const result = await this.profileRepository.addOneProfile(profiledetails);
+    const newlyCreatedProfile = result?.profiles[result?.profiles.length - 1];
+    const newQuests = await createQuest();
+    const identity = {
+      id: { profileId: String(newlyCreatedProfile._id), username },
+      newQuests: newQuests,
+      newProfile: true,
+    };
+    const created = await this.questRepository.createProfileQuests(identity);
     return result;
   }
 
@@ -50,7 +69,6 @@ class ProfileExecute implements ProfileUseCase {
     const result = await this.profileRepository.getLevelRules();
     return result;
   }
-
 }
 
 export default ProfileExecute;

@@ -20,5 +20,20 @@ export default function OpenAiRouter(completionUseCase: CompletionUseCase) {
       }
     }
   );
+
+  router.post(
+    "/check",
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const result: OpenAI.Completions.Completion =
+          await completionUseCase.executeCheckAnswer(req.body);
+        console.log(result.choices[0].text);
+        if (result) res.status(200).json(result.choices[0].text);
+      } catch (err: any) {
+        next(err);
+      }
+    }
+  );
+
   return router;
 }

@@ -12,8 +12,7 @@ export interface ProfileRepository {
     profile: CreateProfileRequestModel
   ): Promise<AccountResponseModel>;
   getAllProfile(): Promise<AccountResponseModel[]>;
-  addOneProfile(profile: ProfileRequestModel): Promise<any>;
+  addOneProfile(profile: any): Promise<any>;
   updateOneProfile(profile: UpdateProfileRequestModel): Promise<any>;
   getLevelRules(): Promise<any>;
-
 }

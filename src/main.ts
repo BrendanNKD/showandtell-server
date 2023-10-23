@@ -42,7 +42,9 @@ import QuestCaseImp from "./domain/use-cases/quest";
     )
   );
 
-  const profileRouter = ProfileRouter(new ProfileExecute(profileRepository));
+  const profileRouter = ProfileRouter(
+    new ProfileExecute(profileRepository, questRepository)
+  );
 
   const collectionRouter = CollectionRouter(
     new CollectionUseCaseImp(collectionRepository)
