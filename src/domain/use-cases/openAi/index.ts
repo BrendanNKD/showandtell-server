@@ -25,14 +25,14 @@ class CompletionCaseImp implements CompletionUseCase {
     return response;
   }
   async executeCheckAnswer(data: any): Promise<OpenAI.Completions.Completion> {
-    console.log(data);
     //one-shot prompting
     const prompt =
       "does this word " +
       data.caption +
-      " exist in the caption sentence " +
+      " exist in the caption " +
+      '"This is a' +
       data.sentence +
-      ". reply in only true or false";
+      '.". Reply in only True or False make the comparison not case sensitive';
 
     const response = await openai.completions.create({
       model: "gpt-3.5-turbo-instruct",

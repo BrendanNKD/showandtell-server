@@ -10,10 +10,8 @@ export default function OpenAiRouter(completionUseCase: CompletionUseCase) {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const { prompt } = req.body;
-        console.log(prompt);
         const result: OpenAI.Completions.Completion =
           await completionUseCase.executeChat(prompt);
-
         if (result) res.status(200).json(result.choices[0].text);
       } catch (err: any) {
         next(err);
@@ -25,9 +23,10 @@ export default function OpenAiRouter(completionUseCase: CompletionUseCase) {
     "/check",
     async (req: Request, res: Response, next: NextFunction) => {
       try {
+        console.log(req.body);
         const result: OpenAI.Completions.Completion =
           await completionUseCase.executeCheckAnswer(req.body);
-        console.log(result.choices[0].text);
+
         if (result) res.status(200).json(result.choices[0].text);
       } catch (err: any) {
         next(err);
