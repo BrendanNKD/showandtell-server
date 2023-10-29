@@ -1,25 +1,23 @@
-# showandtell-server
+# WhatEyeSee-Server
 
-This repository contains an Express Node.js server that serves as a backend for your application. It provides a foundation for building robust and scalable web applications using the Express framework.
+This repository contains an Express Node.js server that serves as a backend for your application. It provides a foundation for building robust and scalable web applications using the Express framework and Clean Architecture Design.
 
 ## Getting Started
 
 Prerequisites
 Before running the server, ensure that you have the following frameworks installed on your system and resources ready :
 
-Node.js (version latest)
-yarn (Package Manager)
-AWS cognito identity provider
-MongoDB server
-OpenAI API
+- Node.js (version latest)
+- yarn (Package Manager)
+- AWS cognito identity provider
+- MongoDB server
+- OpenAI API
 
 Follow these steps to get the server up and running:
 
 ```bash
 yarn build
-```
-
-```bash
+# then
 yarn start:dev
 # or
 yarn start:prod
