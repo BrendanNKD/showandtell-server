@@ -10,6 +10,7 @@ class QuestRepositoryImpl implements QuestRepository {
 
   async createProfileQuests(identity: any): Promise<any> {
     const { id, newQuests, newProfile } = identity;
+    console.log(newProfile)
     if (newProfile) {
       const newProfileQuest = { profileId: id.profileId, quests: newQuests };
       await new Quests(newProfileQuest).save();
@@ -51,7 +52,6 @@ class QuestRepositoryImpl implements QuestRepository {
 
   async getProfileQuest(profileId: any): Promise<any> {
     const result = await Quests.findOne({ profileId }).lean();
-    console.log(result);
     return result;
   }
 }

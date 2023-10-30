@@ -23,7 +23,6 @@ export default function OpenAiRouter(completionUseCase: CompletionUseCase) {
     "/check",
     async (req: Request, res: Response, next: NextFunction) => {
       try {
-        console.log(req.body);
         const result: OpenAI.Completions.Completion =
           await completionUseCase.executeCheckAnswer(req.body);
 

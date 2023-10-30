@@ -106,6 +106,7 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
         const { username } = req.userInfo;
         const { awardStars, profileId } = req.body;
 
+        console.log(req.body);
         const result = await profileUseCase.executeAwardStars({
           awardStars,
           profileId,

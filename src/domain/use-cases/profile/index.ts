@@ -33,7 +33,26 @@ class ProfileExecute implements ProfileUseCase {
   async executeGetOneProfile(
     username: string
   ): Promise<AccountResponseModel | null> {
-    const result = await this.profileRepository.getOneProfile(username);
+    const result: any = await this.profileRepository.getOneProfile(username);
+    // CHECK if any profile is missing quests
+    // loop through the profiles and create quest array append to the one that dont have
+    if (result)
+      for (let i = 0; i < result.profiles.length; i++) {
+        const id = String(result.profiles[i]._id);
+        const quests = await this.questRepository.getProfileQuest(id);
+        if (quests.quests.length == 0) {
+          const newQuests = await createQuest();
+          const identity = {
+            id: { profileId: id, username },
+            newQuests: newQuests,
+            newProfile: false,
+          };
+          const created = await this.questRepository.createProfileQuests(
+            identity
+          );
+        }
+      }
+
     return result;
   }
 
@@ -75,7 +94,7 @@ class ProfileExecute implements ProfileUseCase {
     const level = await this.profileRepository.getLevelRules();
     const nextLimit = level[0].rules[Number(result.level) + 1];
 
-    if (Number(result.stars) > Number(nextLimit)) {
+    if (Number(result.stars) >= Number(nextLimit)) {
       const offset = Number(result.stars) - Number(nextLimit);
 
       result = await this.profileRepository.levelup({
@@ -85,10 +104,11 @@ class ProfileExecute implements ProfileUseCase {
       });
       //add level
       //add reset currentstars
-      console.log(result);
+
       return { result, leveled: true };
     }
-    return { result, leveled: false };
+
+    return { result: result.result, leveled: false };
   }
 }
 
