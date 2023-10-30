@@ -69,6 +69,27 @@ class ProfileExecute implements ProfileUseCase {
     const result = await this.profileRepository.getLevelRules();
     return result;
   }
+  async executeAwardStars(data: any): Promise<any> {
+    const { awardStars, profileId, username } = data;
+    let result = await this.profileRepository.awardStars(data);
+    const level = await this.profileRepository.getLevelRules();
+    const nextLimit = level[0].rules[Number(result.level) + 1];
+
+    if (Number(result.stars) > Number(nextLimit)) {
+      const offset = Number(result.stars) - Number(nextLimit);
+
+      result = await this.profileRepository.levelup({
+        profileId,
+        username,
+        offset,
+      });
+      //add level
+      //add reset currentstars
+      console.log(result);
+      return { result, leveled: true };
+    }
+    return { result, leveled: false };
+  }
 }
 
 export default ProfileExecute;

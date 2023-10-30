@@ -20,18 +20,21 @@ class QuestCaseImp implements QuestUseCase {
     const result = await this.questRepository.getQuest();
     return result;
   }
+
   async executeCompleteQuest(questCompleted: any): Promise<any> {
     const { username, profileId, questIndex } = questCompleted;
     const identity = { id: { username, profileId }, questIndex: questIndex };
     const result = await this.questRepository.completeQuest(identity);
     return true;
   }
+
   async executeCreateProfileQuests(profile: any): Promise<any> {
     const newQuests = createQuest();
     const identity = { id: profile, newQuests: newQuests };
     const result = await this.questRepository.createProfileQuests(identity);
     return true;
   }
+
   async executeGetProfileQuest(profileId: any): Promise<any> {
     const result = await this.questRepository.getProfileQuest(profileId);
     return result;

@@ -3,4 +3,5 @@ export interface QuestUseCase {
   executeCreateProfileQuests(newQuests: any): Promise<any>;
   executeCompleteQuest(questCompleted: any): Promise<any>;
   executeGetProfileQuest(profileId: any): Promise<any>;
+
 }

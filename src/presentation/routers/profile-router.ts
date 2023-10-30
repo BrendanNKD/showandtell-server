@@ -98,5 +98,27 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
     }
   });
 
+  router.post(
+    "/awardStars",
+    authMiddleware,
+    async (req: Request, res: Response) => {
+      try {
+        const { username } = req.userInfo;
+        const { awardStars, profileId } = req.body;
+
+        const result = await profileUseCase.executeAwardStars({
+          awardStars,
+          profileId,
+          username,
+        });
+
+        res.status(200).json(result);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error creating quests" });
+      }
+    }
+  );
+
   return router;
 }

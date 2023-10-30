@@ -15,5 +15,5 @@ export interface ProfileUseCase {
   executeAddOneProfile(profile: ProfileRequestModel): Promise<any>;
   executeUpateOneProfile(profile: UpdateProfileRequestModel): Promise<any>;
   executeGetLevelRules(): Promise<any>;
-
+  executeAwardStars(data: any): Promise<any>;
 }

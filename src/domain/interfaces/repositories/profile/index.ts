@@ -15,4 +15,6 @@ export interface ProfileRepository {
   addOneProfile(profile: any): Promise<any>;
   updateOneProfile(profile: UpdateProfileRequestModel): Promise<any>;
   getLevelRules(): Promise<any>;
+  awardStars(data: any): Promise<any>;
+  levelup(data: any): Promise<any>;
 }
