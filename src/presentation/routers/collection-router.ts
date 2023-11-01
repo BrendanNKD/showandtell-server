@@ -12,7 +12,7 @@ export default function CollectionRouter(collectionUseCase: CollectionUseCase) {
     async (req: Request, res: Response, next: NextFunction) => {
       const { username } = req.userInfo;
       const data = req.body;
-
+      console.log(data);
       try {
         const result = await collectionUseCase.executeSaveCollection({
           username: username,
@@ -40,5 +40,26 @@ export default function CollectionRouter(collectionUseCase: CollectionUseCase) {
       }
     }
   );
+
+  router.post(
+    "/delete",
+    authMiddleware,
+    async (req: Request, res: Response, next: NextFunction) => {
+      const { username } = req.userInfo;
+      const data = req.body;
+      console.log(data);
+      try {
+        const result = await collectionUseCase.executeDeleteOneCollection(
+          username,
+          data
+        );
+
+        if (result) res.status(200).json(result);
+      } catch (err: any) {
+        next(err);
+      }
+    }
+  );
+
   return router;
 }

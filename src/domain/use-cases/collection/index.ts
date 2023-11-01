@@ -41,12 +41,19 @@ class CollectionUseCaseImp implements CollectionUseCase {
     } catch (error) {
       // Handle errors appropriately
       console.error(error);
-      throw error;  
+      throw error;
     }
   }
 
   async executeGetCollection(username: string): Promise<any> {
     const result = await this.collectionRepository.getAllCollection(username);
+    return result;
+  }
+  async executeDeleteOneCollection(username: any, data: any): Promise<any> {
+    const result = await this.collectionRepository.deleteOneCollection(
+      username,
+      data
+    );
     return result;
   }
 }
