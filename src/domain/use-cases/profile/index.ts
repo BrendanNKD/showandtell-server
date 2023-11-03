@@ -36,22 +36,22 @@ class ProfileExecute implements ProfileUseCase {
     const result: any = await this.profileRepository.getOneProfile(username);
     // CHECK if any profile is missing quests
     // loop through the profiles and create quest array append to the one that dont have
-    if (result)
-      for (let i = 0; i < result.profiles.length; i++) {
-        const id = String(result.profiles[i]._id);
-        const quests = await this.questRepository.getProfileQuest(id);
-        if (quests.quests.length == 0) {
-          const newQuests = await createQuest();
-          const identity = {
-            id: { profileId: id, username },
-            newQuests: newQuests,
-            newProfile: false,
-          };
-          const created = await this.questRepository.createProfileQuests(
-            identity
-          );
-        }
-      }
+    // if (result)
+    //   for (let i = 0; i < result.profiles.length; i++) {
+    //     const id = String(result.profiles[i]._id);
+    //     const quests = await this.questRepository.getProfileQuest(id);
+    //     if (quests.quests.length == 0) {
+    //       const newQuests = await createQuest();
+    //       const identity = {
+    //         id: { profileId: id, username },
+    //         newQuests: newQuests,
+    //         newProfile: false,
+    //       };
+    //       const created = await this.questRepository.createProfileQuests(
+    //         identity
+    //       );
+    //     }
+    //   }
 
     return result;
   }
@@ -71,7 +71,6 @@ class ProfileExecute implements ProfileUseCase {
     const identity = {
       id: { profileId: String(newlyCreatedProfile._id), username },
       newQuests: newQuests,
-      newProfile: true,
     };
     const created = await this.questRepository.createProfileQuests(identity);
     return result;

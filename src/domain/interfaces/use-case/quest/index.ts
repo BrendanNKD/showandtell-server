@@ -3,5 +3,8 @@ export interface QuestUseCase {
   executeCreateProfileQuests(newQuests: any): Promise<any>;
   executeCompleteQuest(questCompleted: any): Promise<any>;
   executeGetProfileQuest(profileId: any): Promise<any>;
-
+  executeRefreshProfileQuests(
+    profileId: string,
+    username: string
+  ): Promise<any>;
 }

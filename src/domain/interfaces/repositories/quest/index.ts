@@ -3,5 +3,5 @@ export interface QuestRepository {
   createProfileQuests(quest: any): Promise<any>;
   completeQuest(completedQuest: any): Promise<any>;
   getProfileQuest(profileId: any): Promise<any>;
-
+  refreshProfileQuests(profileId: string, username: string): Promise<any>;
 }

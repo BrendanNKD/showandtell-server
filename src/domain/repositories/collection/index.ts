@@ -35,9 +35,11 @@ class CollectionRepositoryImpl implements CollectionRepository {
     return result;
   }
   async deleteOneCollection(username: any, data: any): Promise<any> {
-    const result = await CollectionModel.updateOne(
+    console.log("im here");
+    console.log(data);
+    const result = await CollectionModel.findOneAndUpdate(
       { username },
-      { $pull: { collections: { _id: data } } },
+      { $pull: { collections: { _id: data.profileId } } },
       { new: true } // Return the updated document
     );
     return result;

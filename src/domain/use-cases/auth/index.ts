@@ -58,13 +58,13 @@ class AuthUserUseCaseImp implements AuthUserUseCase {
         profileId: String(createdProfile.profiles[0]._id),
       },
       newQuests: newQuests,
-      newProfile: true,
     };
 
     const createdQuest = await this.questRepository.createProfileQuests(
       identity
     );
-
+    console.log("created quest HERE");
+    console.log(createdQuest);
     if (createdProfile && createCollection && createdQuest) return true;
     return false;
   }

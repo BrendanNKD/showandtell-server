@@ -50,6 +50,28 @@ export default function QuestRouter(questUseCase: QuestUseCase) {
   );
 
   router.post(
+    "/refreshQuest",
+    authMiddleware,
+    async (req: Request, res: Response) => {
+      try {
+        console.log(req.body);
+        const { username } = req.userInfo;
+        const { profileId } = req.body;
+
+        const result = await questUseCase.executeRefreshProfileQuests(
+          username,
+          profileId
+        );
+
+        res.status(200).json(true);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error refreshing quests" });
+      }
+    }
+  );
+
+  router.post(
     "/completeQuest",
     authMiddleware,
     async (req: Request, res: Response) => {
@@ -62,7 +84,7 @@ export default function QuestRouter(questUseCase: QuestUseCase) {
           profileId,
           questIndex,
         });
-
+        console.log(result);
         res.status(200).json(true);
       } catch (err) {
         console.error(err);
@@ -70,8 +92,6 @@ export default function QuestRouter(questUseCase: QuestUseCase) {
       }
     }
   );
-
- 
 
   return router;
 }

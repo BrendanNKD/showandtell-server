@@ -29,7 +29,7 @@ class QuestCaseImp implements QuestUseCase {
   }
 
   async executeCreateProfileQuests(profile: any): Promise<any> {
-    const newQuests = createQuest();
+    const newQuests = await createQuest();
     const identity = { id: profile, newQuests: newQuests };
     const result = await this.questRepository.createProfileQuests(identity);
     return true;
@@ -38,6 +38,19 @@ class QuestCaseImp implements QuestUseCase {
   async executeGetProfileQuest(profileId: any): Promise<any> {
     const result = await this.questRepository.getProfileQuest(profileId);
     return result;
+  }
+  async executeRefreshProfileQuests(
+    username: string,
+    profileId: string
+  ): Promise<any> {
+    const newQuests = await createQuest();
+
+    const result = await this.questRepository.refreshProfileQuests(
+      profileId,
+      newQuests
+    );
+    if (result) return true;
+    return false;
   }
 }
 

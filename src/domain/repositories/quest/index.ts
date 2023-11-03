@@ -8,26 +8,26 @@ class QuestRepositoryImpl implements QuestRepository {
     return quests;
   }
 
-  async createProfileQuests(identity: any): Promise<any> {
-    const { id, newQuests, newProfile } = identity;
-    console.log(newProfile)
-    if (newProfile) {
-      const newProfileQuest = { profileId: id.profileId, quests: newQuests };
-      await new Quests(newProfileQuest).save();
-    } else {
-      const newQuest = await Quests.updateOne(
-        { profileId: id.profileId },
-        { $set: { quests: newQuests } }
-      )
-        .then((result) => {
-          console.log("Quests array replaced in the specified profile.");
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-    return true;
+  async refreshProfileQuests(profileId: string, newQuest: any): Promise<any> {
+    console.log(profileId);
+    const result = await Quests.updateOne(
+      { profileId: profileId },
+      { $set: { quests: newQuest } }
+    );
+    if (result) return true;
+    return false;
   }
+
+  async createProfileQuests(identity: any): Promise<any> {
+    const { id, newQuests } = identity;
+    // if (newProfile) {
+    const newProfileQuest = { profileId: id.profileId, quests: newQuests };
+    const result = await new Quests(newProfileQuest).save();
+
+    if (result) return true;
+    return false;
+  }
+
   async completeQuest(completedQuest: any): Promise<any> {
     const { id, questIndex } = completedQuest;
 
