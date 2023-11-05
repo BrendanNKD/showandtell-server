@@ -72,13 +72,13 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
       try {
         const { username } = req.userInfo;
         const { index, profile } = req.body;
-        console.log(req.body);
+
         const account = await profileUseCase.executeUpateOneProfile({
           username,
           index,
           profile,
         });
-
+        console.log(account);
         res.status(200).json(account);
       } catch (err) {
         console.error(err);
