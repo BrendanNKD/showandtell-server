@@ -105,6 +105,14 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
     return result;
   }
+  async deleteOneProfile(username: string, profileId: string): Promise<any> {
+    const result = await UserModel.findOneAndUpdate(
+      { username },
+      { $pull: { profiles: { _id: profileId } } },
+      { new: true }
+    );
+    return result;
+  }
 }
 
 export default ProfileRepositoryImpl;

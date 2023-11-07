@@ -17,4 +17,5 @@ export interface ProfileRepository {
   getLevelRules(): Promise<any>;
   awardStars(data: any): Promise<any>;
   levelup(data: any): Promise<any>;
+  deleteOneProfile(username: string,profileId: string): Promise<any>;
 }

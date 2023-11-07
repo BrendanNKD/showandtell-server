@@ -109,6 +109,16 @@ class ProfileExecute implements ProfileUseCase {
 
     return { result: result.result, leveled: false };
   }
+  async executeDeleteOneProfile(
+    username: string,
+    profileId: string
+  ): Promise<any> {
+    const result = await this.profileRepository.deleteOneProfile(
+      username,
+      profileId
+    );
+    return result;
+  }
 }
 
 export default ProfileExecute;

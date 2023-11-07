@@ -16,4 +16,5 @@ export interface ProfileUseCase {
   executeUpateOneProfile(profile: UpdateProfileRequestModel): Promise<any>;
   executeGetLevelRules(): Promise<any>;
   executeAwardStars(data: any): Promise<any>;
+  executeDeleteOneProfile(username: string, profileId: string): Promise<any>;
 }

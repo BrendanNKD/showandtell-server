@@ -4,16 +4,21 @@ import { replicate } from "../../../utils/replicate";
 class GenerateUseCaseImp implements GenerateUseCase {
   async executeGenerateCaption(data: any): Promise<any> {
     const { image, category } = data;
-    const output = await replicate.run(
-      "dummybanana/clip_gpt2:c1eb5c955f92dfdc78aa138a46a4cb544dc321ead2f4aaa4fce06dcf59f24174",
-      {
-        input: {
-          image: image,
-          model: category,
-        },
-      }
-    );
-    return output;
+    try {
+      const output = await replicate.run(
+        "dummybanana/clip_gpt2_refresh:90557f4748025f91c4ac8fb35aeeb2c372e78a73c8d4829981a19f6cc345bbc7",
+        {
+          input: {
+            image: image,
+            model: category,
+          },
+        }
+      );
+      return output;
+    } catch (err: any) {
+      console.log(err);
+    }
+    return false;
   }
 
   async executeGenerateImage(text: string): Promise<any> {

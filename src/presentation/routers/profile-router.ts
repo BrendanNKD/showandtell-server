@@ -121,5 +121,25 @@ export default function ProfileRouter(profileUseCase: ProfileUseCase) {
     }
   );
 
+  router.post(
+    "/deleteOne",
+    authMiddleware,
+    async (req: Request, res: Response) => {
+      try {
+        const { username } = req.userInfo;
+        const { profileId } = req.body;
+        const result = await profileUseCase.executeDeleteOneProfile(
+          username,
+          profileId
+        );
+
+        res.status(200).json(result);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error creating quests" });
+      }
+    }
+  );
+
   return router;
 }

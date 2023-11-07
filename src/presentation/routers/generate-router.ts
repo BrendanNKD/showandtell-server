@@ -8,7 +8,6 @@ export default function GenerateRouter(generateUseCase: GenerateUseCase) {
     "/gencaption",
     async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const { image, category } = req.body;
         const result = await generateUseCase.executeGenerateCaption(req.body);
 
         if (result)
