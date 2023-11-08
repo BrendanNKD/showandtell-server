@@ -9,7 +9,7 @@ const setAuthCookies = (
   res.cookie("id_token", jwtToken.idToken, {
     httpOnly: true,
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
-    secure: config.environment !== "local",
+    secure: true,
     domain: "https://whateyesee.netlify.app",
     path: "/",
     sameSite: "none",
@@ -19,7 +19,7 @@ const setAuthCookies = (
   res.cookie("access_token", jwtToken.accessToken, {
     httpOnly: true,
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
-    secure: config.environment !== "local",
+    secure: true,
     domain: "https://whateyesee.netlify.app",
     path: "/",
     sameSite: "none",
@@ -29,7 +29,7 @@ const setAuthCookies = (
   res.cookie("refresh_token", jwtToken.refreshToken, {
     httpOnly: true,
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
-    secure: config.environment !== "local",
+    secure: true,
     domain: "https://whateyesee.netlify.app",
     path: "/",
     sameSite: "none",
