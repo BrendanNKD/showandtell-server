@@ -12,7 +12,7 @@ const setAuthCookies = (
     secure: config.environment !== "local",
     domain: "https://whateyesee.netlify.app",
     path: "/",
-    sameSite: "strict",
+    sameSite: "none",
   });
 
   // set jwt cookie
@@ -22,7 +22,7 @@ const setAuthCookies = (
     secure: config.environment !== "local",
     domain: "https://whateyesee.netlify.app",
     path: "/",
-    sameSite: "strict",
+    sameSite: "none",
   });
 
   // set refresh token
@@ -32,7 +32,7 @@ const setAuthCookies = (
     secure: config.environment !== "local",
     domain: "https://whateyesee.netlify.app",
     path: "/",
-    sameSite: "strict",
+    sameSite: "none",
   });
 };
 
