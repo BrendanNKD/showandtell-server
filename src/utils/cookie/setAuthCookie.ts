@@ -10,7 +10,7 @@ const setAuthCookies = (
     httpOnly: true,
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
     secure: true,
-    domain: "https://whateyesee.netlify.app",
+    // domain: "https://whateyesee.netlify.app",
     path: "/",
     sameSite: "none",
   });
@@ -20,7 +20,7 @@ const setAuthCookies = (
     httpOnly: true,
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
     secure: true,
-    domain: "https://whateyesee.netlify.app",
+    // domain: "https://whateyesee.netlify.app",
     path: "/",
     sameSite: "none",
   });
@@ -30,7 +30,7 @@ const setAuthCookies = (
     httpOnly: true,
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
     secure: true,
-    domain: "https://whateyesee.netlify.app",
+    // domain: "https://whateyesee.netlify.app",
     path: "/",
     sameSite: "none",
   });
