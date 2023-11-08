@@ -11,7 +11,6 @@ const setAuthCookies = (
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
     secure: config.environment !== "local",
     // domain: config.domain,
-    domain: "localhost:3000",
     path: "/",
     sameSite: "strict",
   });
@@ -22,7 +21,6 @@ const setAuthCookies = (
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
     secure: config.environment !== "local",
     // domain: config.domain,
-    domain: "localhost:3000",
     path: "/",
     sameSite: "strict",
   });
@@ -33,7 +31,6 @@ const setAuthCookies = (
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
     secure: config.environment !== "local",
     // domain: config.domain,
-    domain: "localhost:3000",
     path: "/",
     sameSite: "strict",
   });
