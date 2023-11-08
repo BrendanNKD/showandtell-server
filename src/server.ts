@@ -18,8 +18,7 @@ const cookieParser = require("cookie-parser");
 
 server.use(
   cors({
-    origin:
-      "https://654a44fe61fe6732e3aa0b7f--earnest-fairy-c00ff7.netlify.app/",
+    origin: "https://whateyesee.netlify.app/",
     credentials: true,
   })
 );
