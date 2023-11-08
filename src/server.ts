@@ -18,7 +18,8 @@ const cookieParser = require("cookie-parser");
 
 server.use(
   cors({
-    origin: "http://localhost:3000",
+    origin:
+      "https://654a44fe61fe6732e3aa0b7f--earnest-fairy-c00ff7.netlify.app/",
     credentials: true,
   })
 );
