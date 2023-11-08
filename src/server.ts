@@ -18,7 +18,7 @@ const cookieParser = require("cookie-parser");
 
 server.use(
   cors({
-    origin: "https://whateyesee.netlify.app/",
+    origin: "https://whateyesee.netlify.app",
     credentials: true,
   })
 );
