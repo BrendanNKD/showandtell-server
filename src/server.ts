@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import config from "./config/config";
 
 declare global {
   namespace Express {
@@ -22,7 +23,7 @@ server.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 server.use(
   cors({
-    origin: "https://whateyesee.netlify.app",
+    origin: config.domain,
     credentials: true,
   })
 );

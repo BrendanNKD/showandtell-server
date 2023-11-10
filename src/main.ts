@@ -21,6 +21,7 @@ import CollectionUseCaseImp from "./domain/use-cases/collection";
 import QuestRouter from "./presentation/routers/quest-router";
 import QuestRepositoryImpl from "./domain/repositories/quest";
 import QuestCaseImp from "./domain/use-cases/quest";
+import GenerateRepositoryImpl from "./domain/repositories/generate";
 
 (async () => {
   await getMongodbClient();
@@ -33,6 +34,7 @@ import QuestCaseImp from "./domain/use-cases/quest";
   const profileRepository = new ProfileRepositoryImpl();
   const collectionRepository = new CollectionRepositoryImpl();
   const questRepository = new QuestRepositoryImpl();
+  const generateRepository = new GenerateRepositoryImpl();
   // Create route
   const authRouter = AuthRouter(
     new AuthUserUseCaseImp(
@@ -50,7 +52,9 @@ import QuestCaseImp from "./domain/use-cases/quest";
     new CollectionUseCaseImp(collectionRepository)
   );
 
-  const generateRouter = GenerateRouter(new GenerateUseCaseImp());
+  const generateRouter = GenerateRouter(
+    new GenerateUseCaseImp(generateRepository)
+  );
 
   const chatRouter = OpenAiRouter(new CompletionCaseImp());
 

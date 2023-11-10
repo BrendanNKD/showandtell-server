@@ -13,7 +13,7 @@ const {
   HCAPTCHA_SECRET_KEY,
   HCAPTCHA_SITE_KEY,
   ENVIRONMENT,
-  DOMAIN,
+  WEBAPP_DOMAIN,
   LOG_PATH,
   LOG_INFO_FILE,
   LOG_ERROR_FILE,
@@ -29,7 +29,7 @@ const {
 
 const config = {
   environment: ENVIRONMENT,
-  domain: DOMAIN,
+  domain: WEBAPP_DOMAIN,
   server: {
     port: SERVER_PORT,
   },
