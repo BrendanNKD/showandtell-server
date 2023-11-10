@@ -8,7 +8,7 @@ class CompletionCaseImp implements CompletionUseCase {
   async executeChat(data: string): Promise<OpenAI.Completions.Completion> {
     //one-shot prompting
     const conditioning =
-      " to a young kid in an informative and fun way, using exclamations, don't use any complex words and keep it short";
+      " to a young child of age 3 to 5 years old in an informative, fun and cheery tone, using exclamations, use simple easy to understand language, maximum 30 words. Start the sentence with 'Your picture shows'";
 
     const prompt =
       "Explain the caption word " + '"' + data + '" ' + conditioning;
