@@ -66,6 +66,7 @@ class ProfileExecute implements ProfileUseCase {
   ): Promise<any> {
     const { username } = profiledetails;
     const result = await this.profileRepository.addOneProfile(profiledetails);
+
     const newlyCreatedProfile = result?.profiles[result?.profiles.length - 1];
     const newQuests = await createQuest();
     const identity = {

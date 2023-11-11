@@ -11,5 +11,12 @@
     "strict": true,
     "noImplicitAny": false,
     "skipLibCheck": true
-  }
+  },
+  "include": [
+    "src/**/*.js", // Include TypeScript js
+    "src/**/*.ts", // Include TypeScript files
+    "src/**/*.tsx", // Include TypeScript React files
+    "src/assets/**/*", // Include all files and subdirectories in src/assets
+    "src/data/**/*" // Include all files and subdirectories in src/data
+  ]
 }
