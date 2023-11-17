@@ -9,7 +9,7 @@ import path from "path";
 class CompletionCaseImp implements CompletionUseCase {
   async executeTextToSpeech(data: any): Promise<any> {
     const mp3 = await openai.audio.speech.create({
-      model: "tts-1-hd",
+      model: "tts-1",
       voice: "shimmer",
       input: data,
     });
