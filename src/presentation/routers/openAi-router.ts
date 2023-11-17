@@ -33,5 +33,20 @@ export default function OpenAiRouter(completionUseCase: CompletionUseCase) {
     }
   );
 
+  router.post(
+    "/speech",
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        console.log(req.body);
+        const { text } = req.body;
+        const result: any = await completionUseCase.executeTextToSpeech(text);
+
+        if (result) res.status(200).json(result);
+      } catch (err: any) {
+        next(err);
+      }
+    }
+  );
+
   return router;
 }

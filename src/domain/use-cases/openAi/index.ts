@@ -3,8 +3,19 @@ import { replicate } from "../../../utils/replicate";
 import config from "../../../config/config";
 import OpenAI from "openai";
 import { openai } from "../../../utils/openAi";
+import fs from "fs";
+import path from "path";
 
 class CompletionCaseImp implements CompletionUseCase {
+  async executeTextToSpeech(data: any): Promise<any> {
+    const mp3 = await openai.audio.speech.create({
+      model: "tts-1-hd",
+      voice: "shimmer",
+      input: data,
+    });
+    const buffer = Buffer.from(await mp3.arrayBuffer());
+    return buffer;
+  }
   async executeChat(data: string): Promise<OpenAI.Completions.Completion> {
     //one-shot prompting
     const conditioning =
